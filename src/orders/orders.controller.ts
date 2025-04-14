@@ -7,16 +7,12 @@ import {
   Inject,
   Patch,
   Query,
-  ParseIntPipe,
   ParseUUIDPipe,
 } from '@nestjs/common';
-import { CreateOrderDto } from './dto/create-order.dto';
 import { ORDER_SERVICE } from 'src/config';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
-import { UpdateOrderDto } from './dto/update-order.dto';
 import { catchError } from 'rxjs';
-import { OrderPaginationDto } from './dto/order-pagination.dto';
-import { StatusDto } from './dto/status-dto';
+import { CreateOrderDto, OrderPaginationDto, StatusDto } from './dto';
 
 @Controller('orders')
 export class OrdersController {
@@ -28,6 +24,7 @@ export class OrdersController {
   create(@Body() createOrderDto: CreateOrderDto) {
     return this.ordersClient.send('createOrder', createOrderDto).pipe(
       catchError((err: any) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         throw new RpcException(err);
       }),
     );
