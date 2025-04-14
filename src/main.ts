@@ -17,7 +17,7 @@ async function bootstrap() {
   );
   app.useGlobalFilters(new RpcCustomExceptionFilter());
   await app.listen(envs.port);
-  console.log('Hola mundo primer cambios')
+  console.log('Hola mundo 2 cambio');
   logger.log('GateWay running on port ' + envs.port);
 }
 bootstrap();
